@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sidebar Menu</title>
+  <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/bootstrap-5.1.3/css/bootstrap.min.css">
+  <link type="text/css" rel="stylesheet" href="assets/jsgrid-1.5.3/jsgrid.min.css" />
+  <link type="text/css" rel="stylesheet" href="assets/jsgrid-1.5.3/jsgrid-theme.min.css" />
+  <link rel="stylesheet" href="assets/style/style.css">  
+</head>
+
+<body class="dark-layout">
+
+  <header class="dz__header">
+    <div class="dz__header__container">
+      <span class="shrink-btn">
+          <i class="bx bx-menu"></i>
+      </span>
+      <h2>Customer Dashboard</h2>
+      <div class="dz__header__group_right"> 
+        <img id="customerImage" alt="" class="dz__header__img">
+          <div class="dz__header__theme_selector dark-layout px-2" id="theme-selector"> 
+               <i class='bx bxs-moon'></i>
+          </div>  
+      </div>
+      <span class="dz__header__toggle" id="dz-header-toggle">
+          <i class="bx bx-menu"></i>
+      </span>
+  </div>
+  </header>
+
+  <nav id="dzNavBar">
+    <div class="sidebar-top">
+      <img src="assets/images/billlogo.jpg" class="logo" id="dzIcon" alt="">
+      <h3 class="dz__sidebar__title">PRASAD</h3>
+      <input type="hidden" id="customerName" name="customerName"> <!-- Hidden field to store customername -->
+  </div>
+
+    <div>
+      <div class="dz__nav__list">
+        <dv class="dz__nav__items">
+          <div class="dz__nav__dropdown">
+            <a href="#" class="dz__nav__link dz__nav__link_dd">
+              <i class="bi bi-calendar-check dz__nav__icon"></i>
+              <span class="dz__nav__name">APPOINTMENTS</span>
+              <i class="bx bx-chevron-right dz__nav__dropdown-icon"></i>
+            </a>
+            <div class="dz__nav__dropdown-collapse">
+              <div class="dz__nav__dropdown-content">
+                <a href="#" class="dz__nav__dropdown-item">Create Appointments</a>
+                <a href="#" class="dz__nav__dropdown-item">Approved Appointments</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="dz__nav__dropdown">
+            <a href="#" class="dz__nav__link dz__nav__link_dd">
+              <i class="bi bi-calendar-check dz__nav__icon"></i>
+              <span class="dz__nav__name">Appointments History</span>
+              <i class="bx bx-chevron-right dz__nav__dropdown-icon"></i>
+            </a>
+            <div class="dz__nav__dropdown-collapse">
+              <div class="dz__nav__dropdown-content">
+                <a href="#" class="dz__nav__dropdown-item">Completed Appointments</a>
+                <a href="#" class="dz__nav__dropdown-item">Rejected Appointments</a>
+              </div>
+            </div>
+          </div>
+          <div class="dz__nav__dropdown">
+            <a href="#" class="dz__nav__link dz__nav__link_dd">
+              <i class="bi bi-chat-dots dz__nav__icon"></i>
+              <span class="dz__nav__name">FEEDBACK/INQUARY</span>
+              <i class="bx bx-chevron-right dz__nav__dropdown-icon"></i>
+            </a>
+            <div class="dz__nav__dropdown-collapse">
+              <div class="dz__nav__dropdown-content">
+                <a href="#" class="dz__nav__dropdown-item">Feedback</a>
+                <a href="#" class="dz__nav__dropdown-item">Inquary</a>
+              </div>
+            </div>
+          </div>
+          <div class="dz__nav__dropdown">
+            <a href="#" class="dz__nav__link dz__nav__link_dd">
+              <i class="bi bi-gear dz__nav__icon"></i>
+              <span class="dz__nav__name">SETTING</span>
+              <i class="bx bx-chevron-right dz__nav__dropdown-icon"></i>
+            </a>
+            <div class="dz__nav__dropdown-collapse">
+              <div class="dz__nav__dropdown-content">
+                <a href="#" class="dz__nav__dropdown-item">Edit Profile</a>
+                <a href="#" class="dz__nav__dropdown-item">Change Password</a>
+                <a href="#" class="dz__nav__dropdown-item">Log Out</a>
+              </div>
+            </div>
+          </div>
+        </dv>
+      </div>
+    </div>
+    <div class="sidebar-footer">
+      <div class="admin-user tooltip-element" data-tooltip="1">
+        <a href="#" class="log-out">
+          <i class='bx bx-log-out'></i>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+<!-- Main content for Dashboard -->
+  <main class="dz__main" id="dashboardMain">
+    <div class="container-fluid my-2">
+    
+    <div class="row">
+        <div class="col-xl-4 col-md-6 mb-4">
+            <div class="card card-custom border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-uppercase total-users">
+                                Approval Pending Appointments</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="pendingAppointmentsCount">1450</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="bx bxs-calendar-event bx-lg text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-md-6 mb-4">
+            <div class="card card-custom border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-uppercase total-users">
+                               Total Approved Appointments</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="customerApprovedAppointmentsCount">58</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="bx bx-check-double bx-lg text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-md-6 mb-4">
+            <div class="card card-custom border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-uppercase total-users">
+                                Total Completed Appointment</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="customerCompletedAppointmentsCount">25</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="bx bxs-book bx-lg text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>       
+    </div>    
+  </main>
+<!------------------------------------------------------------------------------------------------------------------------>
+   <!-- Main content for addAppointment page -->
+  <main class="dz__main" id="addAppointmentMain" style="display: none;">
+    <div class="container-fluid my-2">
+
+      <div class="card card-custom">
+        <div class="card-header">
+          <h3 class="card-title">CREATE APPOINTMENT</h3>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-12 col-lg-8 col-xs-12">
+              <form method="POST" class="row g-2" id="memberForm"
+                data-toggle="validator" novalidate="true">
+                <div class="col-md-6">
+                  <label for="vehicleNumber" class="form-label">Vehicle Number</label>
+                  <input type="vehicleNumber" class="form-control" id="vehicleNumber" placeholder="">
+                </div>
+                <div class="col-6">
+                  <label for="carBrand" class="form-label">Car Brand</label>
+                  <select ignore="true" class="form-control dz-selectpicker" data-show-subtext="true"
+                    id="carBrand" name="carBrand" required ignore-edit>
+                    <option value="" selected disabled>Please choose Car Brand</option>
+                    <option>Toyota</option>
+                    <option>Suzuki</option>
+                    <option>Nissan</option>
+                    <option>Honda</option>
+                    <option>Mitsubishi</option>
+                  </select>        
+                </div> 
+                <div class="col-md-6">
+                  <label for="carModel" class="form-label">Car Model</label>
+                  <input type="text" class="form-control" id="carModel" placeholder="">
+                </div>
+                <div class="col-6">
+                  <label for="serviceCategory" class="form-label">Service Category</label>
+                  <select ignore="true" class="form-control dz-selectpicker" data-show-subtext="true" data-live-search="true"
+                    id="serviceCategory" name="serviceCategory" value-name="id" display-name="name" required ignore-edit>
+                    <option value="" selected disabled>Please choose Service Category</option>
+                  </select>        
+                </div> 
+                <div class="col-12">
+                  <label for="serviceDate" class="form-label">Service Date</label>
+                  <input type="date" class="form-control" id="serviceDate" placeholder="">
+                </div>
+              </form>
+            </div>
+          </div>          
+        </div>
+        <div class="card-footer">
+          <div class="col-12">
+            <button id="btnAddAppointment" class="btn btn-primary" type="button">Add</button>
+            <button id="btnClearAppointment" class="btn btn-danger" type="button">Clear</button>
+          </div>
+        </div>
+      </div> 
+    </div> 
+    <div class="card card-custom mt-1">
+      <div class="card-header">
+        <h3 class="card-title">Approval Pending Appointment List</h3>
+      </div>
+      <div class="card-body">
+        <row>
+          <div class="col-sm-12 col-lg-12 col-xs-12">
+            <table class="table" id="selectedBookEntryGrid">
+              <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">AppointmentId</th>
+                <th scope="col">Customer Email</th>
+                <th scope="col">Name</th>
+                <th scope="col">Contact Number</th>
+                <th scope="col">Address</th>
+                <th scope="col">vehicleNumber</th>
+                <th scope="col">Car Brand</th>
+                <th scope="col">Car Model</th>
+                <th scope="col">Service Category</th>
+                <th scope="col">Service Date</th>
+                <th scope="col">Requisition Date</th>
+                <th scope="col">Action</th>
+              </tr>
+              </thead>
+              <tbody id="pendingAppointments">
+                
+              </tbody>
+          </table>
+          </div>
+        </row>
+      </div>
+    </div>
+  </div>
+
+    <!-- Modal for updating appointments -->
+<div class="modal fade" id="updateAppointmentModal" tabindex="-1" role="dialog" aria-labelledby="updateAppointmentModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document"> <!-- Added modal-dialog-centered class -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="updateAppointmentModalLabel">Update Appointment Data</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <!-- Form to update Appointment data -->
+      <form id="updateAppointmentForm">
+        <div class="form-group">
+          <label for="updateVehicleNumber">Vehicle Number</label>
+          <input type="text" class="form-control" id="updateAppointmentVehicleNumber" name="updateVehicleNumber">
+        </div>
+        <div class="form-group">
+          <label for="updateCarBrand" class="form-label">Car Brand</label>
+          <select ignore="true" class="form-control dz-selectpicker" data-show-subtext="true"
+            id="updateAppointmentCarBrand" name="updateCarBrand" required ignore-edit>
+            <option>Toyota</option>
+            <option>Suzuki</option>
+            <option>Nissan</option>
+            <option>Honda</option>
+            <option>Mitsubishi</option>
+          </select>  
+        </div>
+        <div class="form-group">
+          <label for="updateCarModel">Car Model</label>
+          <input type="text" class="form-control" id="updateAppointmentCarModel" name="updateCarModel">
+        </div>
+        <div class="form-group">
+          <label for="serviceCategory" class="form-label">Service Category</label>
+          <select ignore="true" class="form-control dz-selectpicker" data-show-subtext="true" data-live-search="true"
+            id="updateAppointmentServiceCategory" name="serviceCategory" value-name="id" display-name="name" required ignore-edit>
+              <option value="" selected disabled>Please choose Service Category</option>
+          </select> 
+        </div>
+        <div class="form-group">
+          <label for="updateServiceDate">Service Date</label>
+          <input type="date" class="form-control" id="updateAppointmentServiceDate" name="updateServiceDate">
+        </div>
+        <!-- Add more fields as needed -->
+        <input type="hidden" id="receivedAppointmentIdToUpdate" name="receivedAppointmentIdToUpdate"> <!-- Hidden field to store serviceId -->
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      <button type="button" class="btn btn-primary" onclick="updateAppointment()">Update Appointment</button>
+    </div>
+  </div>
+</div>
+</div>
+  </main>
+
+  <!---------------------------------------------------------------------------------------------------------------------------->
+
+   <!-- Main content for approved Appointment page -->
+   <main class="dz__main" id="approvedAppointmentMain" style="display: none;">
+    <div class="container-fluid my-2"> 
+    <div class="card card-custom mt-1">
+      <div class="card-header">
+        <h3 class="card-title">Approved Appointment List</h3>
+      </div>
+      <div class="card-body">
+        <row>
+          <div class="col-sm-12 col-lg-12 col-xs-12">
+            <div class="table-responsive">
+              <table class="table" id="selectedBookEntryGrid">
+                <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">ApprovedId</th>
+                  <th scope="col">Customer Email</th>
+                  <th scope="col">Customer Name</th>
+                  <th scope="col">Contact Number</th>
+                  <th scope="col">Address</th>
+                  <th scope="col">vehicleNumber</th>
+                  <th scope="col">Car Brand</th>
+                  <th scope="col">Car Model</th>
+                  <th scope="col">Service Category</th>
+                  <th scope="col">Service Date</th>
+                  <th scope="col">Requisition Date</th>
+                  <th scope="col">SupervisedBy</th>
+                  <th scope="col">Helpers</th>
+                  <th scope="col">Start Time</th>
+                </tr>
+                </thead>
+                <tbody id="approvedAppointments">
+                  
+                </tbody>
+            </table>
+            </div> 
+          </div>
+        </row>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+</main>
+
+<!------------------------------------------------------------------------------------------------------------------------>
+   <!-- Main content for report page -->
+   <main class="dz__main" id="reportMain"  style="display: none;">
+    <div class="container-fluid my-2"> 
+        <div class="card card-custom mt-1">
+            <div class="card-header">
+                <h3 class="card-title">Report</h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table" id="selectedBookEntryGrid">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Id</th>
+                                <th scope="col">Customer Email</th>
+                                <th scope="col">Customer Name</th>
+                                <th scope="col">Contact Nu.</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">vehicleNu.</th>
+                                <th scope="col">Car Brand</th>
+                                <th scope="col">Car Model</th>
+                                <th scope="col">Service Category</th>
+                                <th scope="col">Service Date</th>
+                                <th scope="col">Requisition Date</th>
+                                <th scope="col">SupervisedBy</th>
+                                <th scope="col">Helpers</th>
+                                <th scope="col">Start Time</th>
+                                <th scope="col">Complete Time</th>
+                                <th scope="col">Remarks</th>
+                                <th scope="col">Fixed Charge</th>
+                                <th scope="col">Additional Charge</th>
+                                <th scope="col">Total Charge</th>
+                            </tr>
+                        </thead>
+                        <tbody id="customerReport">
+                            <!-- Table content goes here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!------------------------------------------------------------------------------------------------------------------------>
+<!-- Main content for Rejected Appointment page -->
+<main class="dz__main" id="rejectedAppointmentMain" style="display: none;">
+  <div class="container-fluid my-2"> 
+  <div class="card card-custom mt-1">
+    <div class="card-header">
+      <h3 class="card-title">Rejected Appointment List</h3>
+    </div>
+    <div class="card-body">
+      <row>
+        <div class="col-sm-12 col-lg-12 col-xs-12">
+          <table class="table" id="selectedBookEntryGrid">
+            <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">RejectedId</th>
+              <th scope="col">Customer Email</th>
+              <th scope="col">Name</th>
+              <th scope="col">Contact Number</th>
+              <th scope="col">Address</th>
+              <th scope="col">vehicleNumber</th>
+              <th scope="col">Car Brand</th>
+              <th scope="col">Car Model</th>
+              <th scope="col">Service Category</th>
+              <th scope="col">Service Date</th>
+              <th scope="col">Requisition Date</th>
+              <th scope="col">Reason</th>
+            </tr>
+            </thead>
+            <tbody id="rejectAppointments">
+              
+            </tbody>
+        </table>
+        </div>
+      </row>
+    </div>
+  </div>
+</div>
+</div>
+</main>
+
+<!------------------------------------------------------------------------------------------------------------------------>
+   <!-- Main content for inquiry page -->
+   <main class="dz__main" id="addInquiryMain" style="display: none;">
+    <div class="container-fluid my-2">
+
+      <div class="card card-custom">
+        <div class="card-header">
+          <h3 class="card-title">CREATE INQUIRY</h3>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-12 col-lg-8 col-xs-12">
+              <form method="POST" class="row g-2" id="memberForm"
+                data-toggle="validator" novalidate="true">
+                <div class="col-12">
+                  <label for="carBrand" class="form-label">Inquiry Type</label>
+                  <select ignore="true" class="form-control dz-selectpicker" data-show-subtext="true"
+                    id="inquiryType" name="inquiryType" required ignore-edit>
+                    <option value="" selected disabled>Please choose Inquiry Type</option>
+                    <option>General Information</option>
+                    <option>Status of Service</option>
+                    <option>Cost Estimate Request</option>
+                    <option>Billing and Payment Queries</option>
+                    <option>Parts Inquiry</option>
+                    <option>Warranty Information</option>
+                    <option>Promotions and Discounts</option>
+                    <option>Customer Account Management</option>
+                    <option>Technical Support</option>
+                    <option>Service Appointment Scheduling</option>
+                    <option>Other Inquiries</option>
+                  </select>        
+                </div> 
+                <div class="col-12">
+                  <label for="problem" class="form-label">Problem</label>
+                  <textarea class="form-control" rows="5" id="problem" name="text"></textarea>
+                </div>  
+              </form>
+            </div>
+          </div>          
+        </div>
+        <div class="card-footer">
+          <div class="col-12">
+            <button id="btnAddInquiry" class="btn btn-primary" type="button">Add</button>
+            <button id="btnClearInquiry" class="btn btn-danger" type="button">Clear</button>
+          </div>
+        </div>
+      </div> 
+    </div> 
+    <div class="card card-custom mt-1">
+      <div class="card-header">
+        <h3 class="card-title">Inquiry List</h3>
+      </div>
+      <div class="card-body">
+        <row>
+          <div class="col-sm-12 col-lg-12 col-xs-12">
+            <table class="table" id="selectedBookEntryGrid">
+              <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Inquiry Id</th>
+                <th scope="col">Customer Email</th>
+                <th scope="col">Name</th>
+                <th scope="col">Inquiry Type</th>
+                <th scope="col">Problem</th>
+                <th scope="col">Response</th>
+              </tr>
+              </thead>
+              <tbody id="inquries">
+                
+              </tbody>
+          </table>
+          </div>
+        </row>
+      </div>
+    </div>
+  </div>
+  </main>
+
+  <!------------------------------------------------------------------------------------------------------------------------>
+   <!-- Main content for feedback page -->
+   <main class="dz__main" id="addFeedbackMain" style="display: none;">
+    <div class="container-fluid my-2">
+
+      <div class="card card-custom">
+        <div class="card-header">
+          <h3 class="card-title">CREATE FEEDBACK</h3>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-12 col-lg-8 col-xs-12">
+              <form method="POST" class="row g-2" id="memberForm"
+                data-toggle="validator" novalidate="true">
+                <div class="col-12">
+                  <label for="carBrand" class="form-label">Feedback Level</label>
+                  <select ignore="true" class="form-control dz-selectpicker" data-show-subtext="true"
+                    id="feedbackLevel" name="feedbackLevel" required ignore-edit>
+                    <option value="" selected disabled>Please choose feedback Level</option>
+                    <option>Very Satisfied</option>
+                    <option>Satisfied</option>
+                    <option>Neutral</option>
+                    <option>Dissatisfied</option>
+                    <option>Very Dissatisfied</option>
+                  </select>        
+                </div> 
+                <div class="col-12">
+                  <label for="feedback" class="form-label">Feedback</label>
+                  <textarea class="form-control" rows="5" id="feedback" name="text"></textarea>
+                </div>  
+              </form>
+            </div>
+          </div>          
+        </div>
+        <div class="card-footer">
+          <div class="col-12">
+            <button id="btnAddFeedback" class="btn btn-primary" type="button">Add</button>
+            <button id="btnClearFeedback" class="btn btn-danger" type="button">Clear</button>
+          </div>
+        </div>
+      </div> 
+    </div> 
+    <div class="card card-custom mt-1">
+      <div class="card-header">
+        <h3 class="card-title">Feedback List</h3>
+      </div>
+      <div class="card-body">
+        <row>
+          <div class="col-sm-12 col-lg-12 col-xs-12">
+            <table class="table" id="selectedBookEntryGrid">
+              <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Feedback Id</th>
+                <th scope="col">Customer Email</th>
+                <th scope="col">Name</th>
+                <th scope="col">Feedback Level</th>
+                <th scope="col">Feedback</th>
+              </tr>
+              </thead>
+              <tbody id="feedbacks">
+                
+              </tbody>
+          </table>
+          </div>
+        </row>
+      </div>
+    </div>
+  </div>
+  </main>
+
+  <!--------------------------------------------------------------------------------------------------------------------------------->
+
+  <!-- Main content for customer Profile Update page -->
+  <main class="dz__main" id="customerProfileUpdate" style="display: none;">
+    <div class="container-fluid my-2">
+
+      <div class="card card-custom">
+        <div class="card-header">
+          <h3 class="card-title">Edit Profile</h3>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-12 col-lg-8 col-xs-12">
+              <form method="POST" class="row g-2" id="memberForm"
+                data-toggle="validator" novalidate="true">
+                <div class="col-md-6">
+                  <label for="editFirstName" class="form-label">First Name</label>
+                  <input type="text" class="form-control" id="editFirstName" placeholder="">
+                </div>
+                <div class="col-md-6">
+                  <label for="editLastName" class="form-label">Last Name</label>
+                  <input type="text" class="form-control" id="editLastName" placeholder="">
+                </div>
+                <div class="col-12">
+                  <label for="editAddress" class="form-label">Address</label>
+                  <input type="text" class="form-control" id="editAddress" placeholder="">
+                </div>
+                <div class="col-12">
+                  <label for="editContactNumber" class="form-label">Contact Number</label>
+                  <input type="text" class="form-control" id="editContactNumber" placeholder="">
+                </div>
+              </form>
+            </div>
+          </div>          
+        </div>
+        <div class="card-footer">
+          <div class="col-12">
+            <button  class="btn btn-primary" onclick="updateCustomerProfile()" type="button">Submit</button>
+            <button  class="btn btn-danger" type="button">Clear</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+   <!--------------------------------------------------------------------------------------------------------------------------------->
+
+  <!-- Main content for customer password Update page -->
+  <main class="dz__main" id="customerPasswordUpdate" style="display: none;">
+    <div class="container-fluid my-2">
+
+      <div class="card card-custom">
+        <div class="card-header">
+          <h3 class="card-title">Change Password</h3>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-12 col-lg-8 col-xs-12">
+              <form method="POST" class="row g-2" id="memberForm"
+                data-toggle="validator" novalidate="true">
+                <div class="col-12">
+                  <label for="oldPassword" class="form-label">Enter Old Password</label>
+                  <input type="password" class="form-control" id="oldPassword" placeholder="">
+                </div>
+                <div class="col-12">
+                  <label for="newPassword1" class="form-label">Enter New password</label>
+                  <input type="password" class="form-control" id="newPassword1" placeholder="">
+                </div>
+                <div class="col-12">
+                  <label for="newPassword2" class="form-label">Re-Enter New Password</label>
+                  <input type="password" class="form-control" id="newPassword2" placeholder="">
+                </div>
+                <input type="hidden" id="passwordToUpdate" > <!-- Hidden field to store customer password-->
+              </form>
+            </div>
+          </div>          
+        </div>
+        <div class="card-footer">
+          <div class="col-12">
+            <button  class="btn btn-primary" onclick="updateCustomerPassword()" type="button">Submit</button>
+            <button  class="btn btn-danger" type="button">Clear</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="assets/script/app.js" defer></script>
+  <script src="assets/script/dashBoard.js" defer></script>
+  <script src="assets/script/approvedAppointment.js" defer></script>
+  <script src="assets/script/rejectedAppointments.js" defer></script>
+  <script src="assets/script/inquiry.js" defer></script>
+  <script src="assets/script/editProfile.js" defer></script>
+  <script src="assets/script/feedback.js" defer></script>
+  <script src="assets/script/changePassword.js" defer></script>
+  <script src="assets/script/appointmentHistory.js" defer></script>
+  <script src="assets/script/appointments.js" defer></script>
+  <script src="assets/script/customerdashboardCount.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script type="text/javascript" src="assets/jsgrid-1.5.3/jsgrid.min.js"></script>
+  <script src="assets/script/jsgrid-example.js"></script>
+  <script src="assets/bootstrap-5.1.3/js/bootstrap.min.js"></script>  
+
+  <script>
+    
+  </script>
+</body>
+
+</html>
