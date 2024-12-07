@@ -1,0 +1,1 @@
+CREATE DATABASE IF NOT EXIXTS rush_aryurvedic_hospital;
