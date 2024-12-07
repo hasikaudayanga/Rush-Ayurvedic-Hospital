@@ -1,11 +1,14 @@
 <?php 
+	if (session_status() == PHP_SESSION_NONE) {
+		session_start();
+}
 	include_once('../db_config.php');
 
 
 	if(isset($_POST['submit'])){
 		$feedbackLevel=$_POST['txtfeedbackLevel'];
 		$feedback_comment=$_POST['txtFeedbackComment'];
-		$patient_id=1005;
+		$patient_id=$_SESSION['patient_id'];
 		$rating=0;
 
 			if($feedbackLevel=="Very Satisfied"){
@@ -23,7 +26,7 @@
 		
 
 
-		$sql="INSERT INTO `feedback`( `patient_id`, `feedback_comment`, `feedback_rating`) VALUES ('{$patient_id}','{$feedbackLevel}','{$rating}')";
+		$sql="INSERT INTO `feedback`( `patient_id`, `feedback_comment`, `feedback_rating`) VALUES ('{$patient_id}','{$feedback_comment}','{$rating}')";
 
 		$result=mysqli_query($conn,$sql);
 	}

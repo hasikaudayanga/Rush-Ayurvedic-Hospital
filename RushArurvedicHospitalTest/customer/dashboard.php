@@ -9,7 +9,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sidebar Menu</title>
+  <title>Customer Dashboard</title>
   <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/bootstrap-5.1.3/css/bootstrap.min.css">
@@ -95,8 +95,8 @@
             </a>
             <div class="dz__nav__dropdown-collapse">
               <div class="dz__nav__dropdown-content">
-                <a href="#" class="dz__nav__dropdown-item">Edit Profile</a>
-                <a href="#" class="dz__nav__dropdown-item">Change Password</a>
+                <!--<a href="#" class="dz__nav__dropdown-item">Edit Profile</a>
+                <a href="#" class="dz__nav__dropdown-item">Change Password</a>-->
                 <a href="#" class="dz__nav__dropdown-item">Log Out</a>
               </div>
             </div>
@@ -125,7 +125,9 @@
                         <div class="col mr-2">
                             <div class="text-uppercase total-users">
                                 Approval Pending Appointments</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="pendingAppointmentsCount">1450</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="pendingAppointmentsCount">
+                              <?php include ('data/dashboard_approval_pending.php'); ?>
+                            </div>
                         </div>
                         <div class="col-auto">
                             <i class="bx bxs-calendar-event bx-lg text-gray-300"></i>
@@ -141,7 +143,9 @@
                         <div class="col mr-2">
                             <div class="text-uppercase total-users">
                                Total Approved Appointments</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="customerApprovedAppointmentsCount">58</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="customerApprovedAppointmentsCount">
+                              <?php include ('data/dashboard_approvaled.php'); ?>
+                            </div>
                         </div>
                         <div class="col-auto">
                             <i class="bx bx-check-double bx-lg text-gray-300"></i>
@@ -157,7 +161,9 @@
                         <div class="col mr-2">
                             <div class="text-uppercase total-users">
                                 Total Completed Appointment</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="customerCompletedAppointmentsCount">25</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="customerCompletedAppointmentsCount">
+                            <?php include ('data/dashboard_completed.php'); ?>
+                            </div>
                         </div>
                         <div class="col-auto">
                             <i class="bx bxs-book bx-lg text-gray-300"></i>
@@ -296,6 +302,7 @@
 
                   <?php 
                       include('../api/db_config.php');
+                      $patientid = $_SESSION['patient_id'];
                       if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                           $sql = "SELECT  a.appoinment_id , 
                                           p.email_address, 
@@ -312,6 +319,7 @@
                                           and a.doctor_id = d.doctor_reg_id 
                                           and a.consultation_id = c.consultation_id 
                                           and a.status_id = 0
+                                          and p.patient_id = $patientid
                                   ";
                           $state="pending";
                           $result = $conn->query($sql);
@@ -439,6 +447,7 @@
 
                    <?php 
                       include('../api/db_config.php');
+                      $patientid = $_SESSION['patient_id'];
                       if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                           $sql = "SELECT  a.appoinment_id , 
                                           p.email_address, 
@@ -455,6 +464,7 @@
                                           and a.doctor_id = d.doctor_reg_id 
                                           and a.consultation_id = c.consultation_id 
                                           and a.status_id = 1
+                                          and p.patient_id = $patientid
                                   ";
                           $result = $conn->query($sql);
                           $appointments = array();
@@ -502,7 +512,7 @@
     <div class="container-fluid my-2"> 
         <div class="card card-custom mt-1">
             <div class="card-header">
-                <h3 class="card-title">Completed Appoinments Details</h3>
+                <h3 class="card-title">Completed Appointments Details</h3>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -518,7 +528,8 @@
                                 <th scope="col">Consultation Type</th>
                                 <th scope="col">Doctor's Name</th>
                                 <th scope="col">Appinment Date & Time</th>
-                                <th scope="col">Consultaion Fee(Rs.)</th>
+                                <th scope="col">Doctor Comment</th>
+                                <th scope="col">Total Fee(Rs.)</th>
                                 <th scope="col">Status</th>
                             </tr>
                         </thead>
@@ -526,6 +537,8 @@
                             
                               <?php 
                                   include '../api/db_config.php';
+                                  $patientid = $_SESSION['patient_id'];
+                                  echo "<script>console.log(" . json_encode(value: $patientid) . ");</script>";
 
 
                               if ($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -541,12 +554,15 @@
                                                   c.consultation_fee,
                                                   d.doctor_charge,
                                                   (c.consultation_fee + d.doctor_charge) AS total_fee,
-                                                  a.status_id 
+                                                  a.status_id,
+                                                  a.comments 
                                           FROM appoinments_info a, doctors_info d, patients_info p, consultation_types c 
                                           WHERE a.patient_id = p.patient_id 
                                                   and a.doctor_id = d.doctor_reg_id 
                                                   and a.consultation_id = c.consultation_id 
-                                                  and a.status_id = 3       
+                                                  and a.status_id = 3  
+                                                  and p.patient_id = $patientid    
+                                          ORDER BY a.appoinment_id desc
                                                  
 
                                           ";
@@ -565,7 +581,8 @@
                                           echo "<td>{$row['description']}</td>";
                                           echo "<td>{$row['d_name']}</td>";
                                           echo "<td>{$row['appoinment_date_time']}</td>";
-                                          echo "<td>{$row['consultation_fee']}</td>";
+                                          echo "<td>{$row['comments']}</td>";
+                                          echo "<td>{$row['total_fee']}</td>";
                                           
                                           echo "<td>{$state}</td>";
                                           
@@ -608,7 +625,8 @@
               <th scope="col">Consultation Type</th>
               <th scope="col">Doctor's Name</th>
               <th scope="col">Appinment Date & Time</th>
-              <th scope="col">Consultaion Fee(Rs.)</th>
+              <th scope="col">Doctor Comment</th>
+              <th scope="col">Total Fee(Rs.)</th>
               <th scope="col">Status</th>
             </tr>
             </thead>
@@ -616,6 +634,7 @@
 
               <?php 
                                   include '../api/db_config.php';
+                                  $patientid = $_SESSION['patient_id'];
 
 
                               if ($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -631,12 +650,15 @@
                                                   c.consultation_fee,
                                                   d.doctor_charge,
                                                   (c.consultation_fee + d.doctor_charge) AS total_fee,
-                                                  a.status_id 
+                                                  a.status_id,
+                                                  a.comments 
                                           FROM appoinments_info a, doctors_info d, patients_info p, consultation_types c 
                                           WHERE a.patient_id = p.patient_id 
                                                   and a.doctor_id = d.doctor_reg_id 
                                                   and a.consultation_id = c.consultation_id 
-                                                  and a.status_id = 2       
+                                                  and a.status_id = 2   
+                                                  and p.patient_id = $patientid    
+                                          ORDER BY a.appoinment_id desc
                                                  
 
                                           ";
@@ -655,7 +677,8 @@
                                           echo "<td>{$row['description']}</td>";
                                           echo "<td>{$row['d_name']}</td>";
                                           echo "<td>{$row['appoinment_date_time']}</td>";
-                                          echo "<td>{$row['consultation_fee']}</td>";
+                                          echo "<td>{$row['comments']}</td>";
+                                          echo "<td>{$row['total_fee']}</td>";
                                           
                                           echo "<td>{$state}</td>";
                                           
@@ -691,7 +714,7 @@
           <div class="row">
             <div class="col-sm-12 col-lg-8 col-xs-12">
               <form method="POST" action="../api/save/addNewFeedback.php" class="row g-2" id="memberForm"
-                data-toggle="validator" novalidate="true">
+                data-toggle="validator">
                 <div class="col-12">
                   <label for="carBrand" class="form-label">Feedback Level</label>
                   <select ignore="true" class="form-control dz-selectpicker" data-show-subtext="true"

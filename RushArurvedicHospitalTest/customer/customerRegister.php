@@ -113,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                     <div class="card-body">
                         <!-- Form to submit data -->
-                        <form method="POST" action="" class="row g-3" id="memberForm" data-toggle="validator" novalidate="false">
+                        <form method="POST" action="" class="row g-3" id="memberForm" data-toggle="validator">
                             <div class="col-md-6">
                                 <label for="first_name" class="form-label">First Name</label>
                                 <input type="text" class="form-control" name="first_name" id="first_name" placeholder="Enter First Name" required>

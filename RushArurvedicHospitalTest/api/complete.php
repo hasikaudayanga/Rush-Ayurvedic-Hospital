@@ -8,11 +8,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Decode JSON payload from the request
     $data = json_decode(file_get_contents('php://input'), true);
 
-    if (($data['comments']) == null){
-        $error_message = 'Cannot Complete. Wait for the doctor comment!';
-
-    }
-
     // Validate the appointment ID
     if (isset($data['appointmentId']) && is_numeric($data['appointmentId'])) {
         $appointment_id = $data['appointmentId'];

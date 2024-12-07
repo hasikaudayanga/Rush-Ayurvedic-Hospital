@@ -118,8 +118,6 @@
             </a>
             <div class="dz__nav__dropdown-collapse">
               <div class="dz__nav__dropdown-content">
-                <a href="#" class="dz__nav__dropdown-item">Edit Profile</a>
-                <a href="#" class="dz__nav__dropdown-item">Change Password</a>
                 <a href="#" class="dz__nav__dropdown-item">Log Out</a>
               </div>
             </div>
@@ -169,7 +167,7 @@
               <div class="row no-gutters align-items-center">
                 <div class="col mr-2">
                   <div class="text-uppercase total-users">
-                    Total Feedback</div>
+                    Total Feedbacks</div>
                   <div class="h5 mb-0 font-weight-bold text-gray-800 custom-font-size" id="inquiryCount">
                     <?php include ('../api/dashboardFeedback.php'); ?>
                   </div>
@@ -187,7 +185,7 @@
               <div class="row no-gutters align-items-center">
                 <div class="col mr-2">
                   <div class="text-uppercase total-users">
-                    Total Received Appointment</div>
+                    Total Received Appointments</div>
                   <div class="h5 mb-0 font-weight-bold text-gray-800 custom-font-size" id="receivedAppointmentCount">
                     <?php include('../api/front_recieved_appoinment.php'); ?></div>
                 </div>
@@ -207,7 +205,7 @@
               <div class="row no-gutters align-items-center">
                 <div class="col mr-2">
                   <div class="text-uppercase total-users">
-                    Total Approved Appointements</div>
+                    Total Approved Appointments</div>
                   <div class="h5 mb-0 font-weight-bold text-gray-800 custom-font-size" id="approvedAppointmentCount">
                     <?php include('../api/front_approved_appoinment.php'); ?></div>
                 </div>
@@ -224,7 +222,7 @@
               <div class="row no-gutters align-items-center">
                 <div class="col mr-2">
                   <div class="text-uppercase total-users">
-                    Total Completed Appointements</div>
+                    Total Completed Appointments</div>
                   <div class="h5 mb-0 font-weight-bold text-gray-800 custom-font-size" id="completedAppointmentCount">
                     <?php include('../api/front_completed_appoinment.php'); ?></div>
                 </div>
@@ -241,8 +239,9 @@
               <div class="row no-gutters align-items-center">
                 <div class="col mr-2">
                   <div class="text-uppercase total-users">
-                    Total Rejected Appointment</div>
-                  <div class="h5 mb-0 font-weight-bold text-gray-800 custom-font-size" id="rejectedAppointmentCount">3
+                    Total Rejected Appointments</div>
+                  <div class="h5 mb-0 font-weight-bold text-gray-800 custom-font-size" id="rejectedAppointmentCount">
+                  <?php include('../api/front_rejected_appoinment.php'); ?>
                   </div>
                 </div>
                 <div class="col-auto">
@@ -770,10 +769,10 @@
       <div class="card-header" style="display: flex; align-items: center; justify-content: space-between;">
         <h3 class="card-title" style="margin: 0;">Approval Pending Appointment List</h3>
         <div style="position: relative; margin-left: auto;">
-          <img src="assets/images/search.jpeg" alt="Search"
+          <!--<img src="assets/images/search.jpeg" alt="Search"
             style="position: absolute; left: 1px; top: 50%; transform: translateY(-50%); width: 22px; height: 22px;">
           <input type="text" id="emailInputPending" placeholder="Enter patient's email"
-            style="padding-left: 30px; text-align: center;" />
+            style="padding-left: 30px; text-align: center;" />-->
         </div>
       </div>
       <div class="card-body">
@@ -918,10 +917,10 @@
       <div class="card-header" style="display: flex; align-items: center; justify-content: space-between;">
         <h3 class="card-title" style="margin: 0;">Approved Appointment List</h3>
         <div style="position: relative; margin-left: auto;">
-          <img src="assets/images/search.jpeg" alt="Search"
+          <!--<img src="assets/images/search.jpeg" alt="Search"
             style="position: absolute; left: 1px; top: 50%; transform: translateY(-50%); width: 22px; height: 22px;">
           <input type="text" id="emailInputApproved" placeholder="Enter patient's email"
-            style="padding-left: 30px; text-align: center;" />
+            style="padding-left: 30px; text-align: center;" />-->
         </div>
       </div>
       <div class="card-body">
@@ -1042,10 +1041,10 @@
         <div class="card-header" style="display: flex; align-items: center; justify-content: space-between;">
           <h3 class="card-title" style="margin: 0;">Completed Appointment List</h3>
           <div style="position: relative; margin-left: auto;">
-            <img src="assets/images/search.jpeg" alt="Search"
+            <!--<img src="assets/images/search.jpeg" alt="Search"
               style="position: absolute; left: 1px; top: 50%; transform: translateY(-50%); width: 22px; height: 22px;">
             <input type="text" id="emailInputCompleted" placeholder="Enter patient email"
-              style="padding-left: 30px; text-align: center;" />
+              style="padding-left: 30px; text-align: center;" />-->
           </div>
         </div>
         <div class="card-body">
@@ -1091,6 +1090,7 @@
                                                   and a.doctor_id = d.doctor_reg_id 
                                                   and a.consultation_id = c.consultation_id 
                                                   and a.status_id = 3
+                                           ORDER BY a.appoinment_id desc       
                                           ";
                       $result = $conn->query($sql);
                       $appointments = array();
@@ -1276,7 +1276,7 @@
                                                   and a.doctor_id = d.doctor_reg_id 
                                                   and a.consultation_id = c.consultation_id 
                                                   and a.status_id = 3       
-                                                 
+                                          ORDER BY a.appoinment_id desc       
 
                                           ";
                   $result = $conn->query($sql);

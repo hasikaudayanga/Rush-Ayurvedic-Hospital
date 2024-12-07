@@ -188,8 +188,7 @@
                 <div class="col-12">
                     <div class="intro">
                         <h1>Contact Us</h1>
-                        <p class="mx-auto">Our team assists with automotive inquiries, appointments, and service support promptly and 
-                            efficiently</p>
+                        <p class="mx-auto">Our team provides expert assistance with health inquiries, appointment scheduling, and treatment support promptly and efficiently.</p>
                     </div>
                 </div>
             </div>
@@ -270,9 +269,9 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-6 text-center">
-                        <h4 class="navbar-brand">Rush Aryurvedic Hospital</h4>
-                        <p>© 2024 Rush Ayurvedic Center. <br> Promoting wellness and holistic healing through the wisdom of Ayurveda.</p>
-                        <p>123 Ayurvedic Street, Colombo, Sri Lanka | Phone: +94 77 123 4567 | Email: info@rushayurveda.com</p>
+                        <h4 class="navbar-brand">Rush Ayurvedic Hospital</h4>
+                        <p>© 2024 Rush Ayurvedic Hospital. All Rights Reserved. <br> Promoting wellness and holistic healing through the wisdom of Ayurveda.</p>
+                        <p>No 96, Nagahawaththa Road, Maharagama | Phone:  (+94) 110114455 | Email:  rushayurvedichospital@gmail.com</p>
                         <!--<div class="col-auto social-icons">
                             <a href="#"><i class='bx bxl-facebook'></i></a>
                             <a href="#"><i class='bx bxl-twitter'></i></a>
